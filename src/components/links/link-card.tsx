@@ -8,6 +8,7 @@ import { useMemo } from "react";
 import { CopyButton } from "../ui/copy-button";
 import { toast } from "sonner";
 import { Eye } from "lucide-react";
+import { LinkCardActions } from "./link-card-actions";
 
 type Props = {
   link: LinkType;
@@ -62,6 +63,7 @@ export const LinkCard = ({ link, baseUrl }: Props) => {
         </Link>
         <div className="text-xs">{date}</div>
       </div>
+      <LinkCardActions link={link} />
     </Card>
   );
 };
