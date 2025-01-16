@@ -11,6 +11,7 @@ import { EllipsisVertical, Pencil, Trash2Icon } from "lucide-react";
 import { useAuth } from "@clerk/nextjs";
 import { LinkFormDialog } from "./link-form-dialog";
 import { useState } from "react";
+import { LinkDeleteConfirmationDialog } from "./link-delete-confirmation-dialog";
 
 type Props = {
   link: LinkType;
@@ -19,6 +20,7 @@ type Props = {
 export const LinkCardActions = ({ link }: Props) => {
   const { isSignedIn } = useAuth();
   const [isEditing, setIsEditing] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
   return (
     <>
       <DropdownMenu>
@@ -34,7 +36,10 @@ export const LinkCardActions = ({ link }: Props) => {
             <span>Edit</span>
             {!isSignedIn && <span> (required sign in)</span>}
           </DropdownMenuItem>
-          <DropdownMenuItem className="text-destructive">
+          <DropdownMenuItem
+            className="text-destructive"
+            onClick={() => setIsDeleting(true)}
+          >
             <Trash2Icon />
             Delete
           </DropdownMenuItem>
@@ -43,6 +48,11 @@ export const LinkCardActions = ({ link }: Props) => {
       <LinkFormDialog
         open={isEditing}
         onOpenChange={setIsEditing}
+        link={link}
+      />
+      <LinkDeleteConfirmationDialog
+        open={isDeleting}
+        onOpenChange={setIsDeleting}
         link={link}
       />
     </>

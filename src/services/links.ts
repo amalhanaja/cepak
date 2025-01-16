@@ -86,3 +86,15 @@ export const updateLinkById = async (
     .where(and(eq(linksTable.id, id), eq(linksTable.userId, userId)));
   revalidatePath("/");
 };
+
+export const deleteLink = async (id: number) => {
+  const userId = await getUserIdOrCreateTempUser();
+  const existing = await db.query.linksTable.findFirst({
+    where: and(eq(linksTable.id, id), eq(linksTable.userId, userId)),
+  });
+  if (!existing) throw Error("unauthorized");
+  await db
+    .delete(linksTable)
+    .where(and(eq(linksTable.id, id), eq(linksTable.userId, userId)));
+  revalidatePath("/");
+};
