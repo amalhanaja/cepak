@@ -38,12 +38,9 @@ export const LinkCard = ({ link, baseUrl }: Props) => {
       />
       <div className="flex-1 flex flex-col">
         <div className="flex flex-col gap-2 sm:flex-row sm:items-center">
-          <Link
-            href={`/${link.slug}`}
-            className="text-lg font-semibold leading-none"
-          >
+          <a href={shortenedUrl} className="text-lg font-semibold leading-none">
             {shortenedUrl.split("://")[1]}
-          </Link>
+          </a>
           <div className="flex gap-2">
             <CopyButton
               textToCopy={shortenedUrl}
