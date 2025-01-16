@@ -37,8 +37,8 @@ export const LinkCard = ({ link, baseUrl }: Props) => {
         className="rounded-full size-8"
       />
       <div className="flex-1 flex flex-col">
-        <div className="flex flex-col gap-2 sm:flex-row sm:items-center">
-          <a href={shortenedUrl} className="text-lg font-semibold leading-none">
+        <div className="flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:items-center">
+          <a href={shortenedUrl} className="text-lg font-semibold leading-none break-all">
             {shortenedUrl.split("://")[1]}
           </a>
           <div className="flex gap-2">
