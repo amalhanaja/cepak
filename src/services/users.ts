@@ -13,11 +13,15 @@ export const createTempUserId = async (): Promise<string> => {
   return tempUserId;
 };
 
+export const getUserCookieId = async (): Promise<string | null> => {
+    const cookiesStore = await cookies();
+  return cookiesStore.get(KEY_TEMP_USER_ID)?.value ?? null;
+}
+
 export const getUserId = async (): Promise<string | null> => {
   const user = await currentUser();
   if (user) {
     return user.id;
   }
-  const cookiesStore = await cookies();
-  return cookiesStore.get(KEY_TEMP_USER_ID)?.value ?? null;
+  return await getUserCookieId()
 };

@@ -72,6 +72,13 @@ export const createLinkWithSlug = async (link: string, slug: string) => {
   revalidatePath("/");
 };
 
+export const updateLinkOwnership = async (cookieId: string, userId: string) => {
+  await db
+    .update(linksTable)
+    .set({ userId: userId })
+    .where(eq(linksTable.userId, cookieId));
+}
+
 export const updateLinkById = async (
   id: number,
   link: string,
